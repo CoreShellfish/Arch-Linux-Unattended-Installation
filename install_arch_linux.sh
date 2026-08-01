@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-DISK_NAME=$(lsblk -o NAME, TYPE --noheadings --nodeps --paths | grep "disk" | head --lines=1 | awk '{print $1}')
+DISK_NAME=$(lsblk -o NAME,TYPE --noheadings --nodeps --paths | grep "disk" | head --lines=1 | awk '{print $1}')
 
 # Sizes defined in Gigabytes, ex: BOOT_SIZE='1' > 1Gb
 BOOT_SIZE='1'
