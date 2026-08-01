@@ -17,6 +17,11 @@ echo "arch-vm" >> /etc/hostname
 echo "root:root" | chpasswd
 
 pacman -S --noconfirm grub efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=/GRUB
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
+sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+curl -o /root/system_setup.sh "https://raw.githubusercontent.com/CoreShellfish/Arch-Linux-Unattended-Installation/main/system_setup.sh"
+chmod +x /root/system_setup.sh
+
+systemctl enable NetworkManager

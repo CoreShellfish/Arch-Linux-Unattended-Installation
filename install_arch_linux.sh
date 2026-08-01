@@ -59,3 +59,7 @@ curl -o /mnt/root/install_chroot.sh "https://raw.githubusercontent.com/CoreShell
 chmod +x /mnt/root/install_chroot.sh
 
 arch-chroot /mnt /root/install_chroot.sh
+
+# Automatic unmounting of the /mnt directory before manual reboot
+umount -R /mnt
+echo 'Installation of the Arch Linux OS finished, type (reboot) to restart the system and remove the bootable device'
