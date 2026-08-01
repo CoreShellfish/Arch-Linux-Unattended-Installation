@@ -1,14 +1,17 @@
 #!/bin/bash
 set -e
-DISK_NAME=$(lsblk -o NAME --noheadings --nodeps --paths | head --lines=1)
-echo $DISK_NAME
+DISK_NAME=$(lsblk -o NAME, TYPE --noheadings --nodeps --paths | grep "disk" | head --lines=1 | awk '{print $1}')
+
+# Sizes defined in Gigabytes, ex: BOOT_SIZE='1' > 1Gb
+BOOT_SIZE='1'
+ROOT_SIZE='10'
 
 # Se eliminan *todas* las particiones existentes en el primer disco listado.
 sgdisk -Z $DISK_NAME
 # Se definen nuevas particiones sobre el disco existente.
-sgdisk -n 1:0:+1G $DISK_NAME
+sgdisk -n 1:0:+${BOOT_SIZE}G $DISK_NAME
 # Partición ESP (EFI System Partition) definida en un total de 1Gigabyte.
-sgdisk -n 2:0:+40G $DISK_NAME
+sgdisk -n 2:0:+${ROOT_SIZE}G $DISK_NAME
 # Ṕartición ROOT definida en un total de 40Gigabytes.
 sgdisk -n 3:0:0 $DISK_NAME
 # Partición HOME definida para el resto de espacio disponible a partir del último sector creado.
@@ -24,7 +27,6 @@ sgdisk -t 3:8302 $DISK_NAME
 
 # Realizamos el formateo de cada partición para que adopte su sistema de archivos
 # correspondiente.
-NVME="nvme"
 if [[ $DISK_NAME == *[0-9] ]]; then
     PART_BOOT="${DISK_NAME}p1"
     PART_ROOT="${DISK_NAME}p2"
