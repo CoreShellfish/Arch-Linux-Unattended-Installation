@@ -43,3 +43,19 @@ mkfs.ext4 -F $PART_HOME
 mount $PART_ROOT /mnt
 mount --mkdir $PART_BOOT /mnt/boot/efi
 mount --mkdir $PART_HOME /mnt/home
+
+# Setup of the system main packages and utilities through the pacstrap script.
+pacstrap -K /mnt base linux linux-firmware base-devel networkmanager nano vim git sudo
+
+# Transfer of the mounted partition structure to the filesystem table so
+# the system know on each boot how partitions are defined.
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# Pulling the arch-chroot setup script from the Arch-Linux-Unattended-Installation
+# repository from Github.
+curl -o /mnt/root/install_chroot.sh "https://raw.githubusercontent.com/CoreShellfish/Arch-Linux-Unattended-Installation/main/install_chroot.sh"
+
+# Give admin privilegies in order to be able to execute the downloaded script.
+chmod +x /mnt/root/install_chroot.sh
+
+arch-chroot /mnt /root/install_chroot.sh
