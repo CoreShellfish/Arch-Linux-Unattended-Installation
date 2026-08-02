@@ -4,7 +4,7 @@ DISK_NAME=$(lsblk -o NAME,TYPE --noheadings --nodeps --paths | grep "disk" | hea
 
 # Sizes defined in Gigabytes, ex: BOOT_SIZE='1' > 1Gb
 BOOT_SIZE='1'
-ROOT_SIZE='10'
+ROOT_SIZE='60'
 
 # Se eliminan *todas* las particiones existentes en el primer disco listado.
 sgdisk -Z $DISK_NAME
