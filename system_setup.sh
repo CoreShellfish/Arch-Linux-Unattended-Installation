@@ -14,8 +14,8 @@ pacman -Syu --noconfirm
 PKGS_SISTEMA="pipewire pipewire-pulse wireplumber networkmanager"
 PKGS_GRAFICOS="mesa lib32-mesa"
 PKGS_UI="hyprland waybar kitty wofi"
-PKGS_UTILIDAD="pavucontrol"
-PKGS_OCIO=""
+PKGS_UTILIDAD="firefox blender inkscape krita bitwarden vlc-plugins-all pavucontrol neovim yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick"
+PKGS_OCIO="discord steam retroarch"
 
 pacman -S --noconfirm $PKGS_SISTEMA $PKGS_GRAFICOS $PKGS_UI $PKGS_UTILIDAD $PKGS_OCIO
 
