@@ -11,11 +11,11 @@ sed -i '/^#\[multilib\]/{s/^#//;n;s/^#//}' /etc/pacman.conf
 
 pacman -Syu --noconfirm
 
-PKGS_SISTEMA="pipewire pipewire-pulse wireplumber networkmanager"
+PKGS_SISTEMA="pipewire pipewire-pulse wireplumber networkmanager flatpak"
 PKGS_GRAFICOS="mesa lib32-mesa"
 PKGS_UI="hyprland waybar kitty wofi"
-PKGS_UTILIDAD="pavucontrol"
-PKGS_OCIO=""
+PKGS_UTILIDAD="blender inkscape krita bitwarden vlc-plugins-all pavucontrol"
+PKGS_OCIO="discord steam retroarch"
 
 pacman -S --noconfirm $PKGS_SISTEMA $PKGS_GRAFICOS $PKGS_UI $PKGS_UTILIDAD $PKGS_OCIO
 
